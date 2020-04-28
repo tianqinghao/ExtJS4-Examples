@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>Ext JS 与 Struts2</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="../../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	//创建Grid表格组件
+	Ext.create('Ext.grid.Panel', {
+		title : '人员列表',
+		renderTo: Ext.getBody(),
+		width:400,
+		height:170,
+		frame:true,
+	    store: {
+	        fields: ['name','age','sex','birthday'],
+	        proxy: {
+	            type: 'ajax',
+	            url : '/ExtJS4-Examples/extjsXml.action',
+	            reader: {
+		            type: 'xml',//Ext.data.reader.Xml解析器
+		            record: 'Person'
+		        }
+	        },
+	        autoLoad: true
+	    },
+		columns: [//配置表格列
+			new Ext.grid.RowNumberer(),//表格行号组件
+			{header: "姓名", width: 80, dataIndex: 'name', sortable: true},
+			{header: "年龄", width: 80, dataIndex: 'age', sortable: true},
+			{header: "性别", width: 80, dataIndex: 'sex', sortable: true},
+			{header: "生日", width: 80, dataIndex: 'birthday', sortable: true}
+		]
+	});
+});
+</script>
+</head>
+<BODY STYLE="margin: 10px"></BODY>
+</html>

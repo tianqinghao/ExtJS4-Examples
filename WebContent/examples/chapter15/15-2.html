@@ -1,0 +1,34 @@
+<HTML>
+ <HEAD>
+  <TITLE>面板组件UI示例</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all-red.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript">
+	Ext.onReady(function(){
+		Ext.create('Ext.panel.Panel',{
+			title:'面板一',
+			height:100,
+			width:200,
+			renderTo: 'p1',
+			bodyPadding: 5
+		});
+		Ext.create('Ext.panel.Panel',{
+			title:'面板二',
+			ui: 'newUI',//指定使用自定义组件UI
+			height:100,
+			width:200,
+			renderTo: 'p2',
+			bodyPadding: 5
+		});
+	});
+  </script>
+ </HEAD>
+ <BODY STYLE="margin: 10px">
+ 	<table><tr>
+ 		<td><div id='p1'></div></td>
+ 		<td><div id='p2'></div></td>
+ 	</tr></table>
+ </BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Ext.grid.feature.Summary示例</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript">
+	Ext.onReady(function(){
+		//创建表格数据
+		var datas = [
+			['张三',2500],
+			['李四',1500]
+		];
+		//创建Grid表格组件
+		Ext.create('Ext.grid.Panel',{
+			title : 'Ext.grid.feature.Summary示例',
+			renderTo: Ext.getBody(),
+			width:300,
+			height:150,
+			frame:true,
+			store: {
+		        fields: ['name','salary','introduce'],
+		        proxy: {
+		            type: 'memory',
+		            data : datas,
+		            reader : 'array'//Ext.data.reader.Array解析器
+		        },
+		        autoLoad: true
+		    },
+		    features: [{
+		    	ftype: 'summary'//Ext.grid.feature.Summary表格汇总特性
+		    }],
+			columns: [//配置表格列
+				{header: "姓名", flex: 1, dataIndex: 'name', 
+					summaryType: 'count',//求数量
+					summaryRenderer: function(value){
+						return '员工总数：'+value
+					}
+				},
+				{header: "薪资", flex: 1, dataIndex: 'salary', 
+					summaryType: 'average',//求平均值
+					summaryRenderer: function(value){
+						return '平均薪资：'+value
+					}
+				}
+			]
+		});
+	});
+  </script>
+ </HEAD>
+ <BODY STYLE="margin: 10px"></BODY>
+</HTML>

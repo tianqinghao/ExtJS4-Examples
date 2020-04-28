@@ -1,0 +1,38 @@
+<HTML>
+ <HEAD>
+  <TITLE>整体同步加载树节点</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript">
+	Ext.onReady(function(){
+	    var store = Ext.create('Ext.data.TreeStore', {
+	        proxy: {
+	            type: 'ajax',
+	            url: 'jsonServer.jsp'
+	        }
+	    });
+
+	    var tree = Ext.create('Ext.tree.Panel', {
+	    	renderTo: Ext.getBody(),
+	        store: store,
+	        rootVisible: false,//隐藏根节点
+	        useArrows: true,//在树节点中使用箭头
+	        frame: true,
+	        title: '整体同步加载树节点',
+	        width: 200,
+	        height: 150,
+	        columns: [{
+		        xtype: 'treecolumn',//树状表格列
+		        text: '名称',
+		        dataIndex: 'text'
+		    }]
+	    });
+	});
+  </script>
+ </HEAD>
+ <BODY STYLE="margin: 10px">
+ <table><tr><td><div id="tree1"/></td><td><div id="tree2"/></td></tr></table>
+ </BODY>
+</HTML>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Ext.grid.column.Action示例</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript">
+	Ext.onReady(function(){
+		//创建表格数据
+		var datas = [
+			['张三',true,new Date(1979,09,13),2500],
+			['李四',false,new Date(1978,10,01),1500],
+			['王五',false,new Date(1981,01,01),1000]
+		];
+		//创建Grid表格组件
+		Ext.create('Ext.grid.Panel',{
+			title : 'Ext.grid.column.Action示例',
+			renderTo: Ext.getBody(),
+			width:400,
+			height:150,
+			frame:true,
+			store: {
+		        fields: ['name','leader','birthday','salary'],
+		        proxy: {
+		            type: 'memory',
+		            data : datas,
+		            reader : 'array'//Ext.data.reader.Array解析器
+		        },
+		        autoLoad: true
+		    },
+			columns: [//配置表格列
+				{header: "姓名", width: 50, dataIndex: 'name'},
+				{header: "组长", width: 50, dataIndex: 'leader', 
+					xtype: 'booleancolumn',//Ext.grid.column.Boolean布尔列
+					trueText: '是',
+					falseText: '否'
+				},
+				{header: "生日", width: 100, dataIndex: 'birthday', 
+					xtype : 'datecolumn',//Ext.grid.column.Date日期列
+					format : 'Y年m月d日'//日期格式化字符串
+				},
+				{header: "薪资", width: 50, dataIndex: 'salary', 
+					xtype: 'numbercolumn',//Ext.grid.column.Number数字列
+					format:'0,000'//数字格式化字符串
+				},
+				{header: "操作", width: 70, 
+					xtype: 'actioncolumn',//Ext.grid.column.Action动作列
+		            items: [{
+		                icon: 'images/edit.gif',//指定编辑图标资源的URL 
+		                handler: function(grid, rowIndex, colIndex) {
+		                	//获取被操作的数据记录
+		                    var rec = grid.getStore().getAt(rowIndex);
+		                    alert("编辑 " + rec.get('name'));
+		                }
+		            },{
+		                icon: 'images/del.gif',//指定编辑图标资源的URL 
+		                handler: function(grid, rowIndex, colIndex) {
+		                    var rec = grid.getStore().getAt(rowIndex);
+		                    alert("删除 " + rec.get('name'));
+		                }                
+		            },{
+		                icon: 'images/save.gif',//指定编辑图标资源的URL 
+		                handler: function(grid, rowIndex, colIndex) {
+		                    var rec = grid.getStore().getAt(rowIndex);
+		                    alert("保存 " + rec.get('name'));
+		                }                
+		            }]
+				}
+			]
+		});
+	});
+  </script>
+ </HEAD>
+ <BODY STYLE="margin: 10px"></BODY>
+</HTML>

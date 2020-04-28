@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>图表示例：文字</TITLE>
+  <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+Ext.onReady(function() {
+	//创建图形组件
+    Ext.create('Ext.draw.Component', {
+        width: 600,
+        height: 400,
+		viewBox : false,//使图形保持原始大小
+        renderTo: 'container',
+        items: [{
+            type: 'path',//路径
+            path: 'm67,291l78,-131l27,105l85,-131l24,125l86,-208l90,225l-390,15z',//路径字符串
+			stroke : "#000000",
+			fill : "#FF3300"
+        },{
+            type: 'text',//文字
+            text:'群山',//要绘制的文本内容
+			x: 90,//横坐标
+            y: 130,//纵坐标
+			font: '58px "Lucida Grande"',//字号及字体
+			stroke : "#000000",//边线色
+			fill : "#FFFF00"//填充色
+        }]
+    });
+});
+</SCRIPT>
+ <BODY><div id="container"/></BODY>
+</HTML>

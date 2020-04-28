@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>图表示例：拖拽缩放</TITLE>
+  <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+Ext.onReady(function() {
+	//创建图形组件
+    var gcmp = Ext.create('Ext.draw.Component', {
+        width: 200,
+        height: 200,
+		viewBox : false,//使图形保持原始大小
+        renderTo: Ext.getBody(),
+		draggable: {
+            constrain: true
+        },
+		floating: true,
+        items: [{
+            type: 'rect',//矩形
+            x: 20,//矩形左上角的横坐标
+            y: 20,//矩形左上角的纵坐标
+            height: 150,//矩形的高度
+            width: 150,//矩形的宽度
+			stroke : "#CCFFFF",//边线的填充颜色
+			fill: '#6600CC'//使用渐变填充
+        }]
+    });
+});
+</SCRIPT>
+ <BODY><div>参考点</div></BODY>
+</HTML>

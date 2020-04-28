@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Ext.grid.feature.Grouping示例</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript">
+	Ext.onReady(function(){
+		//创建表格数据
+		var datas = [
+			['张三','男',29],['李四','女',30],
+			['王五','男',27],['赵六','女',31]
+		];
+		//创建Grid表格组件
+		Ext.create('Ext.grid.Panel',{
+			title : 'Ext.grid.feature.Grouping示例',
+			renderTo: Ext.getBody(),
+			width:300,
+			height:150,
+			frame:true,
+			store: {
+		        fields: ['name','sex','age'],
+		        groupField: 'sex',//设置分组字段
+		        proxy: {
+		            type: 'memory',
+		            data : datas,
+		            reader : 'array'//Ext.data.reader.Array解析器
+		        },
+		        autoLoad: true
+		    },
+		    features: [Ext.create('Ext.grid.feature.Grouping', {
+		    	groupByText : '用本字段分组',
+		    	showGroupsText : '显示分组',
+		        groupHeaderTpl: '性别: {name} ({rows.length})', //分组标题模版
+		        startCollapsed: true //设置初始分组是否收起 
+		    })],
+			columns: [//配置表格列
+				{header: "姓名", flex: 1, dataIndex: 'name'},
+				{header: "性别", flex: 1, dataIndex: 'sex'},
+				{header: "年龄", flex: 1, dataIndex: 'age'}
+			]
+		});
+	});
+  </script>
+ </HEAD>
+ <BODY STYLE="margin: 10px"></BODY>
+</HTML>

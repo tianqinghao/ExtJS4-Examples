@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>图表示例：不规则图形</TITLE>
+  <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+Ext.onReady(function() {
+	//创建图形组件
+    Ext.create('Ext.draw.Component', {
+        width: 600,
+        height: 400,
+		viewBox : false,//使图形保持原始大小
+        renderTo: 'container',
+        items: [{
+            type: 'path',//路径
+            path: 'm67,291l78,-131l27,105l85,-131l24,125l86,-208l90,225l-390,15z',//路径字符串
+			stroke : "#000000",
+			fill : "#FF3300"
+        },{
+        	type : "path",
+        	stroke : "#000000",
+    		fill : "#FF3300",
+        	path:"m75.5,50.453125c1,0 4.978981,1.065407 8,2c13.909798,4.303188 29.008865,5.467552 45,6c15.024963,0.500278 25.132996,3.569504 29,5c2.097168,0.775795 2.901459,2.004868 3,3c0.502441,5.074203 3.499039,9.953323 4,18c0.310684,4.990341 0.662506,12.310005 -1,15c-5.204468,8.421013 -13.068481,16.915863 -18,21c-7.100647,5.880547 -16.817596,9.438614 -26,13c-8.844879,3.430481 -17,3 -23,3c-5,0 -8.152245,0.765366 -10,0c-1.306564,-0.541199 -0.450333,-4.396255 4,-9c6.407822,-6.628716 12.342834,-8.307014 25,-15c5.154648,-2.725731 16.893448,-5.997475 31,-7c14.962265,-1.063332 27,0 38,0c10,0 19.654892,2.822945 26,5c4.823029,1.654816 8,2 10,4l1,0"
+        }]
+    });
+});
+</SCRIPT>
+ <BODY><div id="container"/></BODY>
+</HTML>

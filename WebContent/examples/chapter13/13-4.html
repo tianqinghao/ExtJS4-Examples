@@ -1,0 +1,59 @@
+<HTML>
+ <HEAD>
+  <TITLE>树之间的拖拽示例</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript">
+	Ext.onReady(function(){
+		//创建树面板一
+		Ext.create('Ext.tree.Panel', {
+		    title: '树一',
+		    width: 200,
+	        height: 150,
+		    renderTo: 'tree1',
+		    root: {
+		        text: '树根',//节点名称
+		        expanded: true,//默认展开根节点
+		        children: [{
+		            text: '节点一',//节点名称
+		            leaf: true//true说明为叶子节点
+		        }, {
+		            text: '节点二',//节点名称
+		            leaf: true//true说明为叶子节点
+		        }]
+		    },
+		    viewConfig: {
+	            plugins: {
+	            	allowContainerDrop : true,
+	                ptype: 'treeviewdragdrop',
+	                nodeHighlightOnRepair : true
+	            }
+	        }
+		});
+	    
+		//创建树面板二
+		Ext.create('Ext.tree.Panel', {
+			title: '树二',
+			width: 200,
+	        height: 150,
+		    renderTo: 'tree2',
+		    root: {
+		        text: '树根',
+		        expanded: true
+		    },
+		    viewConfig: {
+	            plugins: {
+	            	allowContainerDrop : true,
+	                ptype: 'treeviewdragdrop'
+	            }
+	        }
+		});
+	});
+  </script>
+ </HEAD>
+ <BODY STYLE="margin: 10px">
+ <table><tr><td><div id="tree1"/></td><td><div id="tree2"/></td></tr></table>
+ </BODY>
+</HTML>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>图表示例：动态变换</TITLE>
+  <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+Ext.onReady(function() {
+	//创建图形组件
+    var gcmp = Ext.create('Ext.draw.Component', {
+        width: 600,
+        height: 400,
+		viewBox : false,//使图形保持原始大小
+        renderTo: 'container',
+        items: [{
+            type: 'rect',//矩形
+            x: 20,//矩形左上角的横坐标
+            y: 20,//矩形左上角的纵坐标
+            height: 150,//矩形的高度
+            width: 150,//矩形的宽度
+			stroke : "#CCFFFF",//边线的填充颜色
+			fill: '#6600CC',//使用渐变填充
+            rotate: {
+                degrees: 180
+            }
+        }]
+    });
+	Ext.get('btn').on('click',function(){
+		//获取第一个子画面对象
+		var sprite = gcmp.surface.items.first();
+		//获取子画面当前角度
+		var degree = sprite.attr.rotation.degrees;
+		//获取子画面的x坐标及y坐标
+		var xc = sprite.attr.translation.x;
+		var yc = sprite.attr.translation.y;
+		//获取子画面的缩放比
+		var xs = sprite.attr.scaling.x || 1;
+		var ys = sprite.attr.scaling.y || 1;
+
+		sprite.setAttributes({
+			//旋转
+			rotation: {
+				degrees : degree + 10 //在原旋转角度的基础上增加10度
+			},
+			//移动
+			translate:{
+				x : xc + 10, //在原横坐标的基础上增加10像素
+				y : yc + 10  //在原横纵标的基础上增加10像素
+			},
+			//缩放
+			scale : {
+				x: xs * 0.9, //原始宽度的90%
+				y: ys * 0.9  //原始高度的90%
+			}
+		}, true);
+	});
+});
+</SCRIPT>
+ <BODY>
+ <input type=button value="变换" id='btn'>
+ <div id="container"/></BODY>
+</HTML>

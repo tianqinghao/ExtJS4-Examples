@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>图表示例：线性渐变</TITLE>
+  <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+Ext.onReady(function() {
+	//创建图形组件
+    Ext.create('Ext.draw.Component', {
+        width: 600,
+        height: 400,
+		viewBox : false,//使图形保持原始大小
+        renderTo: 'container',
+		//定义线性渐变
+		gradients: [{
+            id: 'grad1',//渐变id
+            angle: 90,//角度
+            stops: {//渐变层次
+                0: {
+                    color: '#FF0000'//红色
+                },
+                50: {
+                    color: '#00FF00'//绿色
+                },
+                100: {
+                    color: '#0000FF'//蓝色
+                }
+            }
+        },{
+            id: 'grad2',//渐变id
+            angle: 135,//角度
+            stops: {//渐变层次数组
+                0: {
+                    color: '#CC33FF'//黑色
+                },
+                100: {
+                    color: '#FFFFFF'//白色
+                }
+            }
+        },{
+            id: 'grad3',//渐变id
+            angle: 45,//角度
+            stops: {//渐变层次数组
+                50: {
+                    color: '#000000'//黑色
+                }
+            }
+        }],
+        items: [{
+            type: 'rect',//矩形
+            x: 50,//矩形左上角的横坐标
+            y: 20,//矩形左上角的纵坐标
+            height: 150,//矩形的高度
+            width: 150,//矩形的宽度
+			stroke : "#CCFFFF",//边线的填充颜色
+			fill: 'url(#grad1)'//使用渐变填充
+        },{
+            type: 'circle',//圆形
+            x: 280,//圆心的横坐标
+            y: 95,//圆心的纵坐标
+            radius: 70,//半径
+			stroke : "#FF0000",//边线的填充颜色
+			fill: 'url(#grad2)'//使用渐变填充
+        },{
+            type: 'ellipse',//椭圆形
+            x: 430,//圆心的横坐标
+            y: 95,//圆心的纵坐标
+            radiusX:50,//水平半径
+			radiusY:30,//垂直半径
+			stroke : "#000000",//边线的填充颜色
+			fill : "url(#grad3)"//使用渐变填充
+        }]
+    });
+});
+</SCRIPT>
+ <BODY><div id="container"/></BODY>
+</HTML>

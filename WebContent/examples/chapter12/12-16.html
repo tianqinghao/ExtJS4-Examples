@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Ext.grid.plugin.DragDrop示例</TITLE>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-all.css" />
+  <script type="text/javascript" src="../../ext-4.0/bootstrap.js"></script>
+  <script type="text/javascript" src="../../ext-4.0/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript">
+	Ext.onReady(function(){
+		//注册用户数据模型User
+		Ext.regModel('User', {
+		    fields: ['name','age']
+		});
+		//创建表格数据
+		var datas = [['张三',20],['李四',25],['王五',30]];
+		//创建Grid表格组件
+		Ext.create('Ext.grid.Panel',{
+			title : '表格一',
+			renderTo: 'grid1',
+			width:200,
+			height:150,
+			frame:true,
+			store: {
+		        model : 'User',
+		        proxy: {
+		            type: 'memory',
+		            data : datas,
+		            reader : 'array'//Ext.data.reader.Array解析器
+		        },
+		        autoLoad: true
+		    },
+		    viewConfig: {
+			    plugins: [
+			        //行编辑模式
+					Ext.create('Ext.grid.plugin.DragDrop',{
+						dragGroup: 'grid1',//拖拽组名称
+						dropGroup: 'grid2'//拖放组名称
+					})
+				]
+		    },
+			columns: [//配置表格列
+			    Ext.create('Ext.grid.RowNumberer',{text : '行号', width : 35}),
+				{header: "姓名", width: 50, dataIndex: 'name'},
+				{header: "年龄", width: 100, dataIndex: 'age'}
+			]
+		});
+		
+		//创建Grid表格组件
+		Ext.create('Ext.grid.Panel',{
+			title : '表格二',
+			renderTo: 'grid2',
+			width:200,
+			height:150,
+			frame:true,
+			store: {
+		        model : 'User',
+		        proxy: {
+		            type: 'memory',
+		            data : [],
+		            reader : 'array'//Ext.data.reader.Array解析器
+		        },
+		        autoLoad: true
+		    },
+		    viewConfig: {
+			    plugins: [
+			        //行编辑模式
+					Ext.create('Ext.grid.plugin.DragDrop',{
+						dragGroup: 'grid2',//拖拽组名称
+						dropGroup: 'grid1'//拖放组名称
+					})
+				]
+		    },
+			columns: [//配置表格列
+			    Ext.create('Ext.grid.RowNumberer',{text : '行号', width : 35}),
+			    {header: "姓名", width: 50, dataIndex: 'name'},
+				{header: "年龄", width: 100, dataIndex: 'age'}
+			]
+		});
+	});
+  </script>
+ </HEAD>
+ <BODY STYLE="margin: 10px">
+ 	<table><tr><td><div id='grid1'></div></td><td><div id='grid2'></div></td></tr></table>
+ </BODY>
+</HTML>

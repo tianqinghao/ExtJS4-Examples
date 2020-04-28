@@ -1,0 +1,80 @@
+<HTML>
+ <HEAD>
+  <TITLE>ExtJS3与</TITLE>
+  <meta http-equiv="Content-Type" CONTENT="text/html; charset=UTF-8"/>
+  
+  <!-- 引入ext-3.3.1 -->
+  <link rel="stylesheet" type="text/css" href="ext-3.3.1/resources/css/ext-all.css" />
+  <script type="text/javascript" src="ext-3.3.1/adapter/ext/ext-base.js"></script>
+  <script type="text/javascript" src="ext-3.3.1/ext-all.js"></script>
+  
+  <!-- 引入ext-4.0 -->
+  <link rel="stylesheet" type="text/css" href="../../ext-4.0/resources/css/ext-sandbox.css" />
+  <script type="text/javascript" src="../../ext-4.0/builds/ext-all-sandbox.js"></script>
+  
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+	Ext.onReady(function(){
+		//创建ExtJS3.0中的组件
+		new Ext.Panel({
+			title : 'ExtJS3的面板',
+			layout : 'fit',
+			renderTo : 'targetDiv',
+			height : 400,
+			width : 400,
+			html : '<table width=100% height=100%><tr><td><div id="chartDiv"></div></td></tr></table>',
+			tbar : [{
+				text : '显示图表',
+				handler : function(){
+					win.show();
+				}
+			},{
+				text : '隐藏图表',
+				handler :  function(){
+					win.close();
+				}
+			}]
+		});
+		
+		//创建ExtJS4.0中的JsonStore组件
+		var dataStore = new Ext4.data.JsonStore({
+			fields:['age', 'percentage', 'growing'],
+			data: [
+				{age :'小于30岁', percentage : 10, growing : 35},
+				{age :'30-40岁', percentage : 90, growing : 30}
+			]
+		});
+		//创建ExtJS4.0中的Window组件
+		var win = Ext4.create('Ext.window.Window', {
+			title : 'ExtJS4.0图表',
+			width : 300,
+			height : 300,
+			closeAction : 'hide',
+			renderTo: 'chartDiv',
+			layout : 'fit',
+			items : [{
+				xtype : 'chart',
+				store : dataStore,
+				animate : true,//是否启用动画效果
+				legend : {
+					position : 'bottom' //图例位置
+				},
+				shadow : true,
+				series : [{
+					type : 'pie',//图表序列类型
+					field : 'percentage',//对应饼状图角度的字段名
+					showInLegend : true,//是否显示在图例当中
+					label : {
+						field : 'age',//标签字段名
+						contrast : true,
+						color : '#FFFF00',
+						display : 'middle',//标签显现方式
+						font : '18px "Lucida Grande"'//字体
+					}
+				}]
+			}]
+		});	
+	});
+</SCRIPT>
+ <BODY STYLE="margin: 10px"><div id="targetDiv"></div></BODY>
+</HTML>
